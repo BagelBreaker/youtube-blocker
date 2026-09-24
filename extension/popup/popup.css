@@ -1,0 +1,84 @@
+:root {
+  --bg: #ffffff;
+  --fg: #1f1f1f;
+  --muted: #666;
+  --border: #d6d6d6;
+  --accent: #c4302b;
+  --ok: #16803c;
+  --field: #f6f6f6;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1b22;
+    --fg: #f0f0f4;
+    --muted: #a3a3ad;
+    --border: #3a3944;
+    --accent: #ff5a52;
+    --ok: #4ade80;
+    --field: #2b2a33;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  width: 320px;
+  margin: 0;
+  padding: 14px 16px 12px;
+  font: 13px/1.4 system-ui, sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+}
+header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+h1 { font-size: 16px; margin: 0; }
+.label { display: block; font-weight: 600; margin: 12px 0 4px; }
+.value { font-weight: 400; color: var(--muted); font-variant-numeric: tabular-nums; }
+.hint { margin: 4px 0 6px; color: var(--muted); font-size: 12px; }
+textarea, input[type="text"] {
+  width: 100%;
+  padding: 6px 8px;
+  font: inherit;
+  color: inherit;
+  background: var(--field);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  resize: vertical;
+}
+button {
+  width: 100%;
+  padding: 7px;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+button:hover { filter: brightness(1.08); }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.range-labels { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; }
+fieldset { border: 0; padding: 0; margin: 0; }
+.radio, .check { display: flex; align-items: center; gap: 6px; margin: 4px 0; cursor: pointer; }
+.check:first-of-type { margin-top: 12px; }
+input[type="radio"], input[type="checkbox"] { accent-color: var(--accent); margin: 0; }
+details { margin-top: 10px; }
+summary { cursor: pointer; font-weight: 600; }
+.test { margin-top: 6px; }
+output { display: block; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.allowed, .ok { color: var(--ok); }
+.blocked, .error { color: var(--accent); }
+.status { margin: 10px 0 0; font-size: 12px; color: var(--muted); min-height: 1.4em; }
+.status.ok { color: var(--ok); }
+.status.error { color: var(--accent); }
+
+.switch { position: relative; width: 36px; height: 20px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch span {
+  position: absolute; inset: 0; border-radius: 20px; background: var(--border); cursor: pointer; transition: background 0.15s;
+}
+.switch span::before {
+  content: ""; position: absolute; width: 14px; height: 14px; left: 3px; top: 3px;
+  border-radius: 50%; background: #fff; transition: transform 0.15s;
+}
+.switch input:checked + span { background: var(--accent); }
+.switch input:checked + span::before { transform: translateX(16px); }

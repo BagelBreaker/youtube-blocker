@@ -1,0 +1,58 @@
+/* Thumbnail parts of a card, across YouTube's old and new layouts. */
+:root[data-focus-mode="blur"] [data-focus-state="blocked"] :is(
+  ytd-thumbnail, ytd-playlist-thumbnail, yt-thumbnail-view-model,
+  yt-collection-thumbnail-view-model, .yt-lockup-view-model__content-image,
+  .yt-lockup-view-model-wiz__content-image, .shortsLockupViewModelHostThumbnailContainer,
+  .shortsLockupViewModelHostEndpoint img, ytd-reel-item-renderer img, .media-item-thumbnail-container
+),
+:root[data-focus-blur-pending="true"] [data-focus-state="pending"] :is(
+  ytd-thumbnail, ytd-playlist-thumbnail, yt-thumbnail-view-model,
+  yt-collection-thumbnail-view-model, .yt-lockup-view-model__content-image,
+  .yt-lockup-view-model-wiz__content-image, .shortsLockupViewModelHostThumbnailContainer,
+  .shortsLockupViewModelHostEndpoint img, ytd-reel-item-renderer img, .media-item-thumbnail-container
+) {
+  filter: blur(18px) grayscale(1) !important;
+  overflow: hidden !important;
+}
+
+/* Blur the rest of the card (title, channel, metadata) too, and make it
+   unclickable (no links, hover previews or menus). Targets the card's children
+   rather than the card so the debug score badge and its tooltip still work. */
+:root[data-focus-mode="blur"] [data-focus-state="blocked"] > *,
+:root[data-focus-blur-pending="true"] [data-focus-state="pending"] > * {
+  filter: blur(6px) !important;
+  user-select: none !important;
+  pointer-events: none !important;
+}
+
+:root[data-focus-mode="blur"] [data-focus-state="blocked"] {
+  opacity: 0.55;
+}
+
+:root[data-focus-mode="hide"] [data-focus-state="blocked"] {
+  display: none !important;
+}
+
+/* Debug: show the similarity score on each card. */
+[data-focus-score] {
+  position: relative;
+}
+[data-focus-score]::before {
+  content: attr(data-focus-score);
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  z-index: 10;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font: 600 12px/1.6 system-ui, sans-serif;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+  pointer-events: none;
+}
+[data-focus-state="allowed"][data-focus-score]::before {
+  background: rgba(22, 128, 60, 0.9);
+}
+[data-focus-state="blocked"][data-focus-score]::before {
+  background: rgba(190, 30, 45, 0.9);
+}

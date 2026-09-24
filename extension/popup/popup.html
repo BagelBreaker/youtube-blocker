@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>Focus Filter</h1>
+    <label class="switch" title="Enable filtering">
+      <input type="checkbox" id="enabled">
+      <span></span>
+    </label>
+  </header>
+
+  <label for="topics" class="label">What do you want to focus on?</label>
+  <textarea id="topics" rows="4" placeholder="machine learning&#10;deep learning and neural networks&#10;linear algebra"></textarea>
+  <p class="hint">One topic per line. Several specific lines work better than one broad one.</p>
+  <button id="save">Save focus</button>
+
+  <label for="threshold" class="label">
+    Strictness <span id="thresholdValue" class="value"></span>
+  </label>
+  <input type="range" id="threshold" min="0.05" max="0.6" step="0.01">
+  <div class="range-labels"><span>Lenient</span><span>Strict</span></div>
+
+  <fieldset>
+    <legend class="label">Unrelated videos</legend>
+    <label class="radio"><input type="radio" name="mode" value="blur"> Blur thumbnail</label>
+    <label class="radio"><input type="radio" name="mode" value="hide"> Hide entirely</label>
+  </fieldset>
+
+  <label class="check"><input type="checkbox" id="blurWhilePending"> Blur thumbnails while analyzing</label>
+  <label class="check"><input type="checkbox" id="filterSearch"> Filter search results too</label>
+  <label class="check"><input type="checkbox" id="showScores"> Show similarity scores</label>
+
+  <details>
+    <summary>Test a title</summary>
+    <div class="test">
+      <input type="text" id="testTitle" placeholder="Paste a video title">
+      <output id="testResult"></output>
+    </div>
+  </details>
+
+  <p id="status" class="status"></p>
+  <script src="../defaults.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
